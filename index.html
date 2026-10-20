@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html class="h-full scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="web_standard" name="shell-type"/>
+  <title>DocumentReader - Read Books, Online Docs &amp; Local PDFs Seamlessly</title>
+  
+  <!-- Preconnect and Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Tailwind CSS CDN & Material Design 3 Theme Config -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#fcf8ff",
+            "surface-dim": "#dcd8e5",
+            "surface-bright": "#fcf8ff",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f5f2ff",
+            "surface-container": "#f0ecf9",
+            "surface-container-high": "#eae6f4",
+            "surface-container-highest": "#e4e1ee",
+            "on-surface": "#1b1b24",
+            "on-surface-variant": "#464555",
+            "inverse-surface": "#302f39",
+            "inverse-on-surface": "#f3effc",
+            "outline": "#777587",
+            "outline-variant": "#c7c4d8",
+            "surface-tint": "#4d44e3",
+            "primary": "#3525cd",
+            "on-primary": "#ffffff",
+            "primary-container": "#4f46e5",
+            "on-primary-container": "#dad7ff",
+            "inverse-primary": "#c3c0ff",
+            "secondary": "#505f76",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#d0e1fb",
+            "on-secondary-container": "#54647a",
+            "tertiary": "#7e3000",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#a44100",
+            "on-tertiary-container": "#ffd2be",
+            "error": "#ba1a1a",
+            "on-error": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-error-container": "#93000a",
+            "primary-fixed": "#e2dfff",
+            "primary-fixed-dim": "#c3c0ff",
+            "on-primary-fixed": "#0f0069",
+            "on-primary-fixed-variant": "#3323cc",
+            "secondary-fixed": "#d3e4fe",
+            "secondary-fixed-dim": "#b7c8e1",
+            "on-secondary-fixed": "#0b1c30",
+            "on-secondary-fixed-variant": "#38485d",
+            "tertiary-fixed": "#ffdbcc",
+            "tertiary-fixed-dim": "#ffb695",
+            "on-tertiary-fixed": "#351000",
+            "on-tertiary-fixed-variant": "#7b2f00",
+            "background": "#fcf8ff",
+            "on-background": "#1b1b24",
+            "surface-variant": "#e4e1ee"
+          },
+          borderRadius: {
+            "sm": "0.25rem",
+            "DEFAULT": "0.5rem",
+            "md": "0.75rem",
+            "lg": "1rem",
+            "xl": "1.5rem",
+            "2xl": "1.75rem",
+            "3xl": "2rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "xs": "4px",
+            "base": "4px",
+            "sm": "8px",
+            "md": "16px",
+            "lg": "24px",
+            "xl": "32px",
+            "touch_target": "48px"
+          },
+          fontFamily: {
+            sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            "display-lg": ["Inter", "sans-serif"],
+            "headline-lg": ["Inter", "sans-serif"],
+            "headline-sm": ["Inter", "sans-serif"],
+            "headline-lg-mobile": ["Inter", "sans-serif"],
+            "title-lg": ["Inter", "sans-serif"],
+            "title-md": ["Inter", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"],
+            "label-lg": ["Inter", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"]
+          },
+          fontSize: {
+            "display-lg": ["57px", { lineHeight: "64px", letterSpacing: "-0.25px", fontWeight: "400" }],
+            "headline-lg": ["32px", { lineHeight: "40px", fontWeight: "400" }],
+            "headline-lg-mobile": ["28px", { lineHeight: "36px", fontWeight: "400" }],
+            "headline-sm": ["24px", { lineHeight: "32px", fontWeight: "400" }],
+            "title-lg": ["22px", { lineHeight: "28px", fontWeight: "500" }],
+            "title-md": ["16px", { lineHeight: "24px", letterSpacing: "0.15px", fontWeight: "500" }],
+            "body-lg": ["16px", { lineHeight: "24px", letterSpacing: "0.5px", fontWeight: "400" }],
+            "body-md": ["14px", { lineHeight: "20px", letterSpacing: "0.25px", fontWeight: "400" }],
+            "label-lg": ["14px", { lineHeight: "20px", letterSpacing: "0.1px", fontWeight: "500" }],
+            "label-md": ["12px", { lineHeight: "16px", letterSpacing: "0.5px", fontWeight: "500" }]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    @layer base {
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 120px;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #1b1b24;
+        background-color: #fcf8ff;
+      }
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f0ecf9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c7c4d8;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #777587;
+    }
+    /* Hide scrollbars on subnav for clean swipe experience */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface min-h-full flex flex-col antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+
+  <!-- ========================================================================= -->
+  <!-- MAIN HEADER -->
+  <!-- ========================================================================= -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-surface-container-high/40 transition-all">
+    <div class="h-16 w-full max-w-7xl mx-auto px-md lg:px-xl flex items-center justify-between gap-md">
+      
+      <!-- Logo + App Name -->
+      <a href="#home" class="flex items-center gap-sm shrink-0 group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl p-1">
+        <img alt="DocumentReader App Icon" class="h-8 w-8 rounded-xl object-cover shadow-sm ring-1 ring-black/5 transform group-hover:scale-105 transition-transform" src="assets/app-icon.jpg" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/aida/AEtjO1VnW_sraEZ2BjvrrKfIGN5Aa3QolFFlNeL5QLBdzjj46EbyGGk-kexuSXA2EwzHbJ2mv2d-MhMx-OfewOGg4Mdkm2iXr3tc9IlB25EYDNe3a6PwO_AGW9b2b5SyKLfyI_XDuoz36gVQfq9iuYlLl_30WWFzRATVv9nSwoFrQR2wY0-1OA7TbyYVaArtaQOU8A4OzAOVS9UvsBfBXkO8kPWQyNufLTWthw3whiUqQS3U7jGfW1RcENCP1qd3';"/>
+        <span class="font-title-lg text-title-lg text-on-surface tracking-tight font-semibold">DocumentReader</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav id="desktop-nav" class="hidden lg:flex items-center gap-xs px-xs py-xs" aria-label="Main Navigation">
+        <a href="#home" data-section="home" class="nav-link px-md py-sm font-label-lg transition-colors min-h-touch_target flex items-center bg-secondary-container text-on-secondary-container rounded-full">Home</a>
+        <a href="#features" data-section="features" class="nav-link px-md py-sm rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors min-h-touch_target flex items-center">Features</a>
+        <a href="#downloads" data-section="downloads" class="nav-link px-md py-sm rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors min-h-touch_target flex items-center">Downloads</a>
+        <a href="#privacy" data-section="privacy" class="nav-link px-md py-sm rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors min-h-touch_target flex items-center">Privacy Policy</a>
+        <a href="#terms" data-section="terms" class="nav-link px-md py-sm rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors min-h-touch_target flex items-center">Terms of Service</a>
+        <a href="#data-deletion" data-section="data-deletion" class="nav-link px-md py-sm rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors min-h-touch_target flex items-center">Data Deletion</a>
+      </nav>
+
+      <!-- Right CTAs -->
+      <div class="flex items-center gap-sm sm:gap-md shrink-0">
+        <a href="#downloads" class="inline-flex items-center justify-center h-touch_target px-lg rounded-xl bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container hover:text-on-primary-container active:scale-[0.98] transition-all shadow-sm">
+          Get the App
+        </a>
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0 shadow-sm ring-2 ring-primary/20" title="User Account Profile">
+          <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+        </div>
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" class="lg:hidden flex items-center justify-center w-10 h-10 rounded-xl text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" aria-label="Toggle Navigation Menu">
+          <span class="material-symbols-outlined text-[24px]" id="mobile-menu-icon">menu</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Drawer Menu -->
+    <div id="mobile-drawer" class="hidden lg:hidden border-t border-surface-container-high bg-surface px-md py-sm flex flex-col gap-1 shadow-lg animate-in slide-in-from-top duration-200">
+      <a href="#home" class="mobile-nav-link px-md py-3 rounded-xl font-label-lg text-label-lg text-on-surface hover:bg-surface-container-high transition-colors flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[20px]">home</span>
+        <span>Home</span>
+      </a>
+      <a href="#features" class="mobile-nav-link px-md py-3 rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high transition-colors flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[20px]">auto_stories</span>
+        <span>Features</span>
+      </a>
+      <a href="#downloads" class="mobile-nav-link px-md py-3 rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high transition-colors flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[20px]">download</span>
+        <span>Downloads</span>
+      </a>
+      <a href="#privacy" class="mobile-nav-link px-md py-3 rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high transition-colors flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[20px]">policy</span>
+        <span>Privacy Policy</span>
+      </a>
+      <a href="#terms" class="mobile-nav-link px-md py-3 rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high transition-colors flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[20px]">gavel</span>
+        <span>Terms of Service</span>
+      </a>
+      <a href="#data-deletion" class="mobile-nav-link px-md py-3 rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high transition-colors flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary text-[20px]">delete_forever</span>
+        <span>Data Deletion</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN CONTENT CONTAINER -->
+  <!-- ========================================================================= -->
+  <main class="w-full pt-16 bg-surface flex-1">
+    <div class="flex flex-col w-full">
+
+      <!-- Interactive Sticky Sub-Bar for Quick Anchor Nav -->
+      <div class="sticky top-16 z-40 w-full bg-surface-container-lowest/90 backdrop-blur-md shadow-sm border-b border-surface-container-high/40">
+        <div class="max-w-7xl mx-auto px-md lg:px-xl py-sm flex items-center justify-between overflow-x-auto no-scrollbar gap-sm">
+          <div class="flex items-center gap-xs text-on-surface-variant text-label-md font-label-md shrink-0">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-medium">
+              <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+              v1.2.0 Stable Released
+            </span>
+          </div>
+          <div class="flex items-center gap-xs shrink-0">
+            <a class="sub-nav-link px-3 py-1.5 rounded-full text-label-md font-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#home" data-sub="home">Overview</a>
+            <a class="sub-nav-link px-3 py-1.5 rounded-full text-label-md font-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#features" data-sub="features">Capabilities</a>
+            <a class="sub-nav-link px-3 py-1.5 rounded-full text-label-md font-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#downloads" data-sub="downloads">Downloads</a>
+            <a class="sub-nav-link px-3 py-1.5 rounded-full text-label-md font-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#privacy" data-sub="privacy">Privacy Policy</a>
+            <a class="sub-nav-link px-3 py-1.5 rounded-full text-label-md font-label-md text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" href="#terms" data-sub="terms">Terms</a>
+            <a class="sub-nav-link px-3 py-1.5 rounded-full text-label-md font-label-md bg-primary-fixed text-on-primary-fixed hover:bg-primary hover:text-on-primary transition-colors flex items-center gap-1" href="#data-deletion" data-sub="data-deletion">
+              <span class="material-symbols-outlined text-[16px]">lock_reset</span>
+              Data Deletion
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- HERO SECTION (#home) -->
+      <!-- ===================================================================== -->
+      <section class="relative overflow-hidden w-full bg-gradient-to-b from-surface via-surface-container-low to-surface py-xl lg:py-24" id="home">
+        <!-- Ambient subtle background decorative spheres -->
+        <div class="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-primary-fixed-dim/30 blur-3xl pointer-events-none"></div>
+        <div class="absolute top-1/2 right-0 w-[30rem] h-[30rem] rounded-full bg-secondary-container/40 blur-3xl pointer-events-none"></div>
+
+        <div class="relative max-w-7xl mx-auto px-md lg:px-xl">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-xl lg:gap-12 items-center">
+            
+            <!-- Hero Text & CTA Matrix -->
+            <div class="lg:col-span-7 flex flex-col gap-md lg:gap-lg">
+              <div class="inline-flex items-center gap-2 self-start px-3.5 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed text-label-lg font-label-lg shadow-sm">
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+                <span>Now Available on Android, Windows, Mac &amp; Linux</span>
+              </div>
+
+              <div class="flex flex-col gap-sm">
+                <h1 class="font-headline-lg text-headline-lg lg:text-display-lg lg:font-display-lg text-on-surface tracking-tight leading-tight">
+                  Read Books, Online Docs <br class="hidden sm:inline"/>
+                  <span class="text-primary">&amp; Local PDFs</span> Seamlessly
+                </h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                  The all-in-one Material Design 3 document experience engineered for lightning-fast offline PDF browsing, instant clutter-free web article extraction, and end-to-end synchronized reading states across your devices.
+                </p>
+              </div>
+
+              <!-- Feature Quick Chips -->
+              <div class="flex flex-wrap gap-2 pt-1">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container-highest text-on-surface text-label-md font-label-md">
+                  <span class="material-symbols-outlined text-primary text-[18px]">picture_as_pdf</span>
+                  Local PDF Engine
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container-highest text-on-surface text-label-md font-label-md">
+                  <span class="material-symbols-outlined text-primary text-[18px]">auto_stories</span>
+                  Article Extractor
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container-highest text-on-surface text-label-md font-label-md">
+                  <span class="material-symbols-outlined text-primary text-[18px]">sync_saved_locally</span>
+                  Cross-Device Cloud Sync
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-surface-container-highest text-on-surface text-label-md font-label-md">
+                  <span class="material-symbols-outlined text-primary text-[18px]">security</span>
+                  Strict On-Device Privacy
+                </span>
+              </div>
+
+              <!-- Download Action Matrix -->
+              <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
+                <!-- Google Play CTA -->
+                <a class="group flex items-center gap-3 px-5 py-3.5 rounded-xl bg-on-surface text-surface hover:bg-primary transition-all duration-200 shadow-md min-h-touch_target" href="https://play.google.com" rel="noopener noreferrer" target="_blank">
+                  <svg class="w-7 h-7 fill-current shrink-0" viewBox="0 0 24 24">
+                    <path d="M3.609 1.814L13.793 12 3.61 22.186a2.036 2.036 0 0 1-.61-.715 2.11 2.11 0 0 1-.219-.948V3.477c0-.348.077-.668.22-.948.141-.28.344-.52.608-.715zm11.603 11.604l2.585 2.585-11.83 6.76 9.245-9.345zm2.585-2.836l-2.585 2.585L5.967 3.822l11.83 6.76zm1.417.818a1.69 1.69 0 0 1 0 2.4l-1.047 1.047-3.003-3.003 3.003-3.003 1.047 1.047a1.69 1.69 0 0 1 0 .512z"></path>
+                  </svg>
+                  <div class="flex flex-col text-left">
+                    <span class="text-[10px] tracking-wider uppercase font-medium leading-none text-surface/80">Get it on</span>
+                    <span class="font-title-md text-title-md font-semibold leading-tight text-surface">Google Play</span>
+                  </div>
+                </a>
+
+                <!-- Desktop Hub Jump Button -->
+                <a class="flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-surface-container-high text-on-surface hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors font-label-lg text-label-lg min-h-touch_target" href="#downloads">
+                  <span class="material-symbols-outlined text-[20px]">desktop_windows</span>
+                  <span>All Desktop Builds (.exe, .dmg, .AppImage)</span>
+                </a>
+              </div>
+
+              <!-- Trust & Privacy mini badge -->
+              <div class="flex items-center gap-2 text-on-surface-variant text-label-md font-label-md">
+                <span class="material-symbols-outlined text-primary text-[18px]">verified_user</span>
+                <span>Google Play Policy Compliant • No Ad Trackers • Zero Telemetry of Local Files</span>
+              </div>
+            </div>
+
+            <!-- Hero Preview Mockup Showcase -->
+            <div class="lg:col-span-5 relative flex justify-center">
+              <div class="relative w-full max-w-md bg-surface-container-lowest rounded-3xl p-4 shadow-xl border border-surface-container-high/60">
+                <!-- App Preview Header Graphic -->
+                <div class="relative overflow-hidden rounded-2xl bg-surface-container aspect-[16/10] flex items-center justify-center">
+                  <img class="w-full h-full object-cover rounded-2xl transform hover:scale-[1.03] transition-transform duration-300" 
+                       alt="Modern Android tablet and smartphone mockup running DocumentReader with split screen reading mode showing a crisp PDF document with teal bookmarks alongside an online extracted clean web article on a soft indigo and lavender Material 3 background." 
+                       src="assets/hero-mockup.jpg"
+                       onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuDmlrrEnxdC2SzFi30_iUEDPU-R6JGX8MqOB8B1LKXGZFzq3DX1z4APAi_tlLVX_qh5HPYndTu69_J4KivOpAIqhRjbIshnhU6yTA8-wjy4iQbDPgzNmmWfo_RUqeM7pngTMcInaJktNvTQBGdnZlCjFkhoocXJ6IQ_P_kRiLKMV75RexMwBpxznlhFTSTCiEDc-7dFLZwSvar75CoBnV0zQm7zQHt47zw7sUd4fuc0XY460ER8HgMsQg';"/>
+                </div>
+
+                <!-- Floating Mini Card Overlay: Offline Ready -->
+                <div class="absolute -bottom-4 -left-4 bg-surface-container-lowest p-3.5 rounded-2xl shadow-lg border border-surface-container-high/60 flex items-center gap-3 backdrop-blur-md">
+                  <div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed shrink-0 shadow-sm">
+                    <span class="material-symbols-outlined text-[22px]">offline_pin</span>
+                  </div>
+                  <div>
+                    <p class="font-label-lg text-label-lg text-on-surface font-semibold">100% Offline Ready</p>
+                    <p class="font-label-md text-label-md text-on-surface-variant">Local storage sandbox</p>
+                  </div>
+                </div>
+
+                <!-- Floating Mini Card Overlay: Play Protect -->
+                <div class="absolute -top-3 -right-3 bg-surface-container-lowest p-3 rounded-2xl shadow-lg border border-surface-container-high/60 flex items-center gap-2.5 backdrop-blur-md">
+                  <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container shrink-0 shadow-sm">
+                    <span class="material-symbols-outlined text-[18px]">verified</span>
+                  </div>
+                  <span class="font-label-md text-label-md text-on-surface font-semibold">Play Protect Verified</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- KEY FEATURES SECTION (#features) -->
+      <!-- ===================================================================== -->
+      <section class="w-full bg-surface-container-low py-xl lg:py-24" id="features">
+        <div class="max-w-7xl mx-auto px-md lg:px-xl flex flex-col gap-xl">
+          
+          <!-- Section Header -->
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-md">
+            <div class="max-w-2xl flex flex-col gap-xs">
+              <span class="font-label-md text-label-md uppercase tracking-wider text-primary font-semibold">ENGINEERED FOR DEEP READING</span>
+              <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">
+                Designed for Documents, Optimized for Focus.
+              </h2>
+              <p class="font-body-lg text-body-lg text-on-surface-variant">
+                Everything you need to digest technical papers, e-books, and web essays without visual clutter or subscription paywalls.
+              </p>
+            </div>
+            <div class="shrink-0">
+              <span class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-surface-container-highest text-on-surface font-label-md text-label-md shadow-sm">
+                <span class="material-symbols-outlined text-primary text-[18px]">bolt</span> Ultra Lightweight Engine (~42MB)
+              </span>
+            </div>
+          </div>
+
+          <!-- Feature Cards Grid (Material 3 Bento) -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-lg">
+            
+            <!-- Feature 1: Local PDF Reader -->
+            <div class="flex flex-col bg-surface-container-lowest rounded-2xl p-lg shadow-sm hover:shadow-md transition-shadow border border-surface-container-high/50">
+              <div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary mb-md shadow-sm">
+                <span class="material-symbols-outlined text-[28px]">description</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-on-surface font-semibold mb-xs">Fast Local PDF Engine</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md leading-relaxed">
+                Instantaneous rendering of gigabyte-scale PDF files with page thumbnail grids, rapid keyword search, multi-color highlighting, and continuous smooth zoom.
+              </p>
+              <div class="mt-auto pt-md flex flex-col gap-2 border-t border-surface-container-high/40">
+                <div class="flex items-center gap-2 text-label-md font-label-md text-on-surface">
+                  <span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                  <span>Zero cloud uploads for local files</span>
+                </div>
+                <div class="flex items-center gap-2 text-label-md font-label-md text-on-surface">
+                  <span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                  <span>Hardware-accelerated scrolling</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Feature 2: Web & Online Docs Reader -->
+            <div class="flex flex-col bg-surface-container-lowest rounded-2xl p-lg shadow-sm hover:shadow-md transition-shadow border border-surface-container-high/50">
+              <div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-secondary mb-md shadow-sm">
+                <span class="material-symbols-outlined text-[28px]">language</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-on-surface font-semibold mb-xs">Web Article Extractor</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md leading-relaxed">
+                Paste any web URL or documentation link. DocumentReader strips popups, navigation headers, and cookie notices, presenting raw typography in calm reader mode.
+              </p>
+              <div class="mt-auto pt-md flex flex-col gap-2 border-t border-surface-container-high/40">
+                <div class="flex items-center gap-2 text-label-md font-label-md text-on-surface">
+                  <span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                  <span>Offline saving for web articles</span>
+                </div>
+                <div class="flex items-center gap-2 text-label-md font-label-md text-on-surface">
+                  <span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                  <span>Customizable serif, sans &amp; sepia modes</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Feature 3: Universal Sync & Phone Verification -->
+            <div class="flex flex-col bg-surface-container-lowest rounded-2xl p-lg shadow-sm hover:shadow-md transition-shadow border border-surface-container-high/50">
+              <div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary mb-md shadow-sm">
+                <span class="material-symbols-outlined text-[28px]">sync_lock</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-on-surface font-semibold mb-xs">Secure Sync &amp; OTP Login</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md leading-relaxed">
+                Sign in frictionlessly via your phone number and instantaneous SMS OTP. Sync your bookmarks, custom reading tags, and exact page positions seamlessly.
+              </p>
+              <div class="mt-auto pt-md flex flex-col gap-2 border-t border-surface-container-high/40">
+                <div class="flex items-center gap-2 text-label-md font-label-md text-on-surface">
+                  <span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                  <span>End-to-end encrypted session tokens</span>
+                </div>
+                <div class="flex items-center gap-2 text-label-md font-label-md text-on-surface">
+                  <span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+                  <span>One-click complete data deletion</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- DOWNLOADS MATRIX CENTER (#downloads) -->
+      <!-- ===================================================================== -->
+      <section class="w-full bg-surface py-xl lg:py-24" id="downloads">
+        <div class="max-w-7xl mx-auto px-md lg:px-xl flex flex-col gap-xl">
+          
+          <div class="text-center max-w-2xl mx-auto flex flex-col gap-xs">
+            <span class="font-label-md text-label-md uppercase tracking-wider text-primary font-semibold">CROSS PLATFORM ECOSYSTEM</span>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">
+              Download DocumentReader v1.2.0
+            </h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant">
+              Available on every operating system you work on. All binaries are cryptographically signed and SHA256 verified.
+            </p>
+          </div>
+
+          <!-- Platform Cards Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md">
+            
+            <!-- Android Card -->
+            <div class="flex flex-col bg-surface-container-lowest rounded-2xl p-md lg:p-lg shadow-sm hover:shadow-md transition-all border border-surface-container-high/50">
+              <div class="flex items-center justify-between mb-md">
+                <div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container shadow-sm">
+                  <span class="material-symbols-outlined text-[26px]">android</span>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-primary-fixed text-on-primary-fixed text-label-md font-label-md font-medium">Play Store</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-on-surface font-semibold">Android</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md">Android 8.0 Oreo or newer. Optimized for tablets, phones &amp; foldable displays.</p>
+              <div class="flex flex-col gap-1 text-label-md font-label-md text-on-surface-variant mb-lg font-mono">
+                <span>Size: <strong class="font-sans">~38 MB</strong></span>
+                <span>Arch: <strong class="font-sans">arm64-v8a, x86_64</strong></span>
+                <span class="truncate text-xs">SHA256: <code class="bg-surface-container px-1 py-0.5 rounded">e49a...89b1</code></span>
+              </div>
+              <div class="mt-auto flex flex-col gap-2">
+                <a class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-primary text-on-primary font-label-lg text-label-lg hover:bg-primary-container transition-colors min-h-touch_target shadow-sm" href="https://play.google.com" rel="noopener noreferrer" target="_blank">
+                  <span class="material-symbols-outlined text-[20px]">shop</span>
+                  <span>Google Play Install</span>
+                </a>
+                <button class="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors min-h-touch_target" onclick="showDownloadToast('DocumentReader-v1.2.0.apk', 'Direct Android APK (~38MB)')">
+                  <span class="material-symbols-outlined text-[18px]">download</span>
+                  <span>Download Direct APK</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Windows Card -->
+            <div class="flex flex-col bg-surface-container-lowest rounded-2xl p-md lg:p-lg shadow-sm hover:shadow-md transition-all border border-surface-container-high/50">
+              <div class="flex items-center justify-between mb-md">
+                <div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface shadow-sm">
+                  <span class="material-symbols-outlined text-[26px]">desktop_windows</span>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-label-md font-label-md font-medium">v1.2.0</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-on-surface font-semibold">Windows</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md">Windows 10 / 11 64-bit. Available as native installer (.exe) or MSIX package.</p>
+              <div class="flex flex-col gap-1 text-label-md font-label-md text-on-surface-variant mb-lg font-mono">
+                <span>Size: <strong class="font-sans">~46 MB</strong></span>
+                <span>Arch: <strong class="font-sans">x64, ARM64</strong></span>
+                <span class="truncate text-xs">SHA256: <code class="bg-surface-container px-1 py-0.5 rounded">c82f...02fa</code></span>
+              </div>
+              <div class="mt-auto flex flex-col gap-2">
+                <button class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-on-surface text-surface font-label-lg text-label-lg hover:bg-primary transition-colors min-h-touch_target shadow-sm" onclick="showDownloadToast('DocumentReader-Setup-v1.2.0.exe', 'Windows 64-bit Installer (~46MB)')">
+                  <span class="material-symbols-outlined text-[20px]">download</span>
+                  <span>Download .exe (Installer)</span>
+                </button>
+                <button class="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors min-h-touch_target" onclick="showDownloadToast('DocumentReader.msix', 'Microsoft Store MSIX Package (~44MB)')">
+                  <span>MSIX Package (Store Build)</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- macOS Card -->
+            <div class="flex flex-col bg-surface-container-lowest rounded-2xl p-md lg:p-lg shadow-sm hover:shadow-md transition-all border border-surface-container-high/50">
+              <div class="flex items-center justify-between mb-md">
+                <div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface shadow-sm">
+                  <span class="material-symbols-outlined text-[26px]">laptop_mac</span>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-label-md font-label-md font-medium">Universal</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-on-surface font-semibold">macOS</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md">macOS 12 Monterey or later. Universal binary for Apple Silicon (M1/M2/M3) and Intel.</p>
+              <div class="flex flex-col gap-1 text-label-md font-label-md text-on-surface-variant mb-lg font-mono">
+                <span>Size: <strong class="font-sans">~52 MB</strong></span>
+                <span>Arch: <strong class="font-sans">Apple Silicon + Intel</strong></span>
+                <span class="truncate text-xs">SHA256: <code class="bg-surface-container px-1 py-0.5 rounded">91cb...77d3</code></span>
+              </div>
+              <div class="mt-auto flex flex-col gap-2">
+                <button class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-on-surface text-surface font-label-lg text-label-lg hover:bg-primary transition-colors min-h-touch_target shadow-sm" onclick="showDownloadToast('DocumentReader-Universal-v1.2.0.dmg', 'macOS Universal DMG (~52MB)')">
+                  <span class="material-symbols-outlined text-[20px]">download</span>
+                  <span>Download .dmg</span>
+                </button>
+                <button id="brew-copy-btn" class="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors min-h-touch_target" onclick="copyBrewCommand()">
+                  <span class="material-symbols-outlined text-[16px]">content_copy</span>
+                  <span id="brew-text">Homebrew Cask</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Linux Card -->
+            <div class="flex flex-col bg-surface-container-lowest rounded-2xl p-md lg:p-lg shadow-sm hover:shadow-md transition-all border border-surface-container-high/50">
+              <div class="flex items-center justify-between mb-md">
+                <div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface shadow-sm">
+                  <span class="material-symbols-outlined text-[26px]">terminal</span>
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-surface-container-highest text-on-surface-variant text-label-md font-label-md font-medium">Open Source</span>
+              </div>
+              <h3 class="font-title-lg text-title-lg text-on-surface font-semibold">Linux</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-md">Debian, Ubuntu, Arch, Fedora. Standalone AppImage and standard Debian package.</p>
+              <div class="flex flex-col gap-1 text-label-md font-label-md text-on-surface-variant mb-lg font-mono">
+                <span>Size: <strong class="font-sans">~45 MB</strong></span>
+                <span>Arch: <strong class="font-sans">x86_64</strong></span>
+                <span class="truncate text-xs">SHA256: <code class="bg-surface-container px-1 py-0.5 rounded">43be...19a4</code></span>
+              </div>
+              <div class="mt-auto flex flex-col gap-2">
+                <button class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-on-surface text-surface font-label-lg text-label-lg hover:bg-primary transition-colors min-h-touch_target shadow-sm" onclick="showDownloadToast('DocumentReader-v1.2.0.AppImage', 'Linux Standalone AppImage (~45MB)')">
+                  <span class="material-symbols-outlined text-[20px]">download</span>
+                  <span>Download AppImage</span>
+                </button>
+                <button class="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors min-h-touch_target" onclick="showDownloadToast('document-reader_1.2.0_amd64.deb', 'Debian / Ubuntu Package (~43MB)')">
+                  <span>Debian / Ubuntu (.deb)</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- PRIVACY POLICY SECTION (#privacy) -->
+      <!-- FORMALLY FORMATTED FOR GOOGLE PLAY CONSOLE REVIEW -->
+      <!-- ===================================================================== -->
+      <section class="w-full bg-surface-container-low py-xl lg:py-24" id="privacy">
+        <div class="max-w-[840px] mx-auto px-md lg:px-xl flex flex-col gap-lg">
+          
+          <!-- Section Title & Meta -->
+          <div class="flex flex-col gap-xs pb-md">
+            <div class="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md text-label-md font-medium">
+              <span class="material-symbols-outlined text-[16px]">policy</span>
+              <span>Google Play Safety Standard Compliance</span>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">Privacy Policy</h2>
+            <p class="font-label-lg text-label-lg text-on-surface-variant">Effective Date: January 1, 2025 • Last Updated: January 1, 2025</p>
+          </div>
+
+          <!-- Formal Body Content -->
+          <div class="flex flex-col gap-lg bg-surface-container-lowest p-md lg:p-xl rounded-3xl shadow-sm text-body-md font-body-md text-on-surface leading-relaxed border border-surface-container-high/60">
+            <div>
+              <h3 class="font-title-lg text-title-lg font-semibold text-on-surface mb-2">1. Introduction &amp; Commitment</h3>
+              <p class="text-on-surface-variant">
+                DocumentReader (“we”, “our”, or “us”) provides an integrated document and web reader software application for mobile and desktop systems. We believe your reading materials, documents, and privacy are fundamentally personal. This Privacy Policy details our transparent policies regarding the collection, use, and disclosure of data when you use DocumentReader on Android (via Google Play Store), Windows, macOS, or Linux.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-title-lg text-title-lg font-semibold text-on-surface mb-2">2. Device Permissions &amp; Local Storage Usage</h3>
+              <p class="text-on-surface-variant mb-3">
+                In compliance with the Google Play Developer Distribution Agreement and Android Privacy Policies, DocumentReader requires minimal runtime permissions to fulfill core reading operations:
+              </p>
+              <ul class="flex flex-col gap-2 pl-4 list-disc text-on-surface-variant">
+                <li>
+                  <strong>Storage / Document Media Permissions (<code class="bg-surface-container px-1.5 py-0.5 rounded text-xs text-primary font-mono">READ_MEDIA_DOCUMENTS</code> / <code class="bg-surface-container px-1.5 py-0.5 rounded text-xs text-primary font-mono">READ_EXTERNAL_STORAGE</code>):</strong>
+                  Used solely to read files explicitly selected by you through the system file picker. DocumentReader renders all PDFs, ePUBs, and text files locally on your physical device. We NEVER scan your broader file system, and local file contents are NEVER transmitted or copied to our servers.
+                </li>
+                <li>
+                  <strong>Internet Access (<code class="bg-surface-container px-1.5 py-0.5 rounded text-xs text-primary font-mono">android.permission.INTERNET</code>):</strong>
+                  Used exclusively for two user-directed operations: (1) fetching HTML text when you input an online article URL to use Reader Mode, and (2) communicating with our secure backend to sync reading progress and bookmarks.
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-title-lg text-title-lg font-semibold text-on-surface mb-2">3. Phone Number &amp; OTP Authentication Data</h3>
+              <p class="text-on-surface-variant">
+                To provide cross-device synchronization without tracking passwords or social identity graphs, DocumentReader uses a telephone number login mechanism. Your phone number is collected solely to send a One-Time Password (OTP) verification code and to create an anonymized cryptographic account identifier (<code class="bg-surface-container px-1.5 py-0.5 rounded text-xs font-mono">uid</code>). We do NOT share, rent, sell, or disclose your telephone number to advertising networks or third-party brokers.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-title-lg text-title-lg font-semibold text-on-surface mb-2">4. Third-Party Services &amp; Crash Reporting</h3>
+              <p class="text-on-surface-variant mb-3">
+                DocumentReader employs standard Android infrastructure provided by Google:
+              </p>
+              <ul class="flex flex-col gap-2 pl-4 list-disc text-on-surface-variant">
+                <li><strong>Google Play Services:</strong> Used for secure application distribution, automated license verification, and in-app updates.</li>
+                <li><strong>Anonymized Crash Diagnostics:</strong> In the event of an application crash, diagnostic stack traces (devoid of document contents, file paths, or personal user data) may be sent to identify memory leaks or PDF rendering faults.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-title-lg text-title-lg font-semibold text-on-surface mb-2">5. Data Retention, GDPR, and Children's Privacy</h3>
+              <p class="text-on-surface-variant">
+                We adhere strictly to the General Data Protection Regulation (GDPR) and the Children's Online Privacy Protection Act (COPPA). DocumentReader does not knowingly collect personal data from children under the age of 13. Synchronized cloud tokens, bookmarks, and URLs are retained only as long as your account remains active. You may purge all your data instantly using the interactive tool below.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-title-lg text-title-lg font-semibold text-on-surface mb-2">6. Privacy Inquiries &amp; Data Protection Officer</h3>
+              <p class="text-on-surface-variant">
+                If you have questions, feedback, or concerns regarding DocumentReader's data processing or this policy, please contact our data safety team directly at:
+                <a class="text-primary font-medium underline ml-1 hover:text-primary-container transition-colors" href="mailto:privacy@documentreader.app">privacy@documentreader.app</a>.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- TERMS OF SERVICE SECTION (#terms) -->
+      <!-- ===================================================================== -->
+      <section class="w-full bg-surface py-xl lg:py-24" id="terms">
+        <div class="max-w-[840px] mx-auto px-md lg:px-xl flex flex-col gap-lg">
+          
+          <!-- Section Title & Meta -->
+          <div class="flex flex-col gap-xs pb-md">
+            <div class="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-medium">
+              <span class="material-symbols-outlined text-[16px]">gavel</span>
+              <span>Legal Agreement &amp; Operating Terms</span>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">Terms of Service</h2>
+            <p class="font-label-lg text-label-lg text-on-surface-variant">Effective Date: January 1, 2025</p>
+          </div>
+
+          <!-- Formal Body Content -->
+          <div class="flex flex-col gap-lg bg-surface-container-lowest p-md lg:p-xl rounded-3xl shadow-sm text-body-md font-body-md text-on-surface leading-relaxed border border-surface-container-high/60">
+            <div>
+              <h3 class="font-title-lg text-title-lg font-semibold text-on-surface mb-2">1. Acceptance of Terms</h3>
+              <p class="text-on-surface-variant">
+                By downloading, installing, accessing, or using the DocumentReader software application on Android or any desktop operating system, you agree to be bound by these Terms of Service. If you do not agree to these terms, do not install or use the application.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-title-lg text-title-lg font-semibold text-on-surface mb-2">2. Permitted Use &amp; Intellectual Property</h3>
+              <p class="text-on-surface-variant mb-3">
+                DocumentReader grants you a personal, worldwide, revocable, non-exclusive, non-transferable license to use the application for viewing and organizing personal documents and reading web pages.
+              </p>
+              <ul class="flex flex-col gap-2 pl-4 list-disc text-on-surface-variant">
+                <li>You retain full ownership and intellectual property rights in all documents, files, and annotations you open with DocumentReader.</li>
+                <li>You agree not to reverse engineer, decompile, or attempt to extract the source code of closed components except where permitted by applicable open-source licenses.</li>
+                <li>When using the Web Article Extractor, you are solely responsible for ensuring your access complies with the terms and copyright notices of the source publication.</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 class="font-title-lg text-title-lg font-semibold text-on-surface mb-2">3. Disclaimer of Warranties</h3>
+              <p class="text-on-surface-variant">
+                The DocumentReader application is provided “as is” and “as available”, without warranties of any kind, either express or implied, including but not limited to the implied warranties of merchantability, fitness for a particular purpose, or uninterrupted availability. We do not guarantee that file parsing will be error-free or compatible with damaged or malformed PDF/document containers.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-title-lg text-title-lg font-semibold text-on-surface mb-2">4. Limitation of Liability</h3>
+              <p class="text-on-surface-variant">
+                To the maximum extent permitted by applicable law, in no event shall DocumentReader or its developers be liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including but not limited to loss of data, document corruption, or device malfunction resulting from the use or inability to use the software.
+              </p>
+            </div>
+
+            <div>
+              <h3 class="font-title-lg text-title-lg font-semibold text-on-surface mb-2">5. Termination &amp; Governing Law</h3>
+              <p class="text-on-surface-variant">
+                We reserve the right to suspend or terminate accounts that violate these terms or abuse synchronization infrastructure. These terms shall be governed by and construed in accordance with applicable consumer protection and digital safety laws.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ===================================================================== -->
+      <!-- DATA DELETION REQUEST & INSTRUCTIONS (#data-deletion) -->
+      <!-- GOOGLE PLAY REQUIREMENT -->
+      <!-- ===================================================================== -->
+      <section class="w-full bg-surface-container-low py-xl lg:py-24" id="data-deletion">
+        <div class="max-w-[840px] mx-auto px-md lg:px-xl flex flex-col gap-lg">
+          
+          <!-- Section Header -->
+          <div class="flex flex-col gap-xs pb-md">
+            <div class="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md font-medium">
+              <span class="material-symbols-outlined text-[16px]">delete_forever</span>
+              <span>Google Play Data Safety &amp; Account Deletion Standard</span>
+            </div>
+            <h2 class="font-headline-lg text-headline-lg text-on-surface font-semibold tracking-tight">Account &amp; Data Deletion</h2>
+            <p class="font-body-lg text-body-lg text-on-surface-variant">
+              You have full sovereignty over your data. Request permanent deletion of your DocumentReader account, telephone verification records, and synchronized document data.
+            </p>
+          </div>
+
+          <!-- Info Box: What Happens to Data -->
+          <div class="bg-surface-container-lowest p-md lg:p-lg rounded-2xl shadow-sm flex flex-col gap-md border border-surface-container-high/60">
+            <h3 class="font-title-md text-title-md font-semibold text-on-surface flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-[20px]">info</span>
+              What data is deleted upon request?
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-md text-on-surface-variant text-body-md font-body-md">
+              <div class="p-3 bg-surface-container rounded-xl flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-error text-[20px] shrink-0 mt-0.5">phone_disabled</span>
+                <div>
+                  <strong class="text-on-surface block text-label-lg font-label-lg">Phone Number &amp; Auth Tokens</strong>
+                  <span>Immediately disassociated, invalidated, and purged from authentication databases.</span>
+                </div>
+              </div>
+              <div class="p-3 bg-surface-container rounded-xl flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-error text-[20px] shrink-0 mt-0.5">cloud_off</span>
+                <div>
+                  <strong class="text-on-surface block text-label-lg font-label-lg">Remote Bookmarks &amp; History</strong>
+                  <span>All remote URLs, reading progress markers, and user tag indexes are permanently destroyed.</span>
+                </div>
+              </div>
+            </div>
+            <div class="text-label-md font-label-md text-on-surface-variant flex items-start sm:items-center gap-2 pt-1">
+              <span class="material-symbols-outlined text-primary text-[16px] shrink-0 mt-0.5 sm:mt-0">schedule</span>
+              <span><strong>Processing timeline:</strong> Account access is revoked immediately. Disaster recovery backups are automatically purged within 30 days. Local files stored on your Android or desktop machine remain intact and strictly under your physical control.</span>
+            </div>
+          </div>
+
+          <!-- Interactive Self-Service Deletion Form -->
+          <div class="bg-surface-container-lowest p-md lg:p-xl rounded-3xl shadow-sm flex flex-col gap-md border border-surface-container-high/60">
+            <h3 class="font-title-lg text-title-lg font-semibold text-on-surface">Submit Deletion Request</h3>
+            <p class="text-body-md font-body-md text-on-surface-variant">
+              Enter the mobile number associated with your DocumentReader sync account. We will transmit a final confirmation OTP to ensure unauthorized parties cannot initiate account deletion.
+            </p>
+            
+            <form class="flex flex-col gap-md mt-2" id="deletion-form" onsubmit="handleDeletionSubmit(event)">
+              <!-- Phone Input with Country Code -->
+              <div class="flex flex-col gap-1.5">
+                <label class="font-label-lg text-label-lg text-on-surface font-medium" for="del-phone">Registered Phone Number</label>
+                <div class="flex flex-col sm:flex-row gap-2">
+                  <select class="h-14 px-3 rounded-xl bg-surface-container-high text-on-surface font-body-md text-body-md border border-outline-variant/50 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer" id="del-code" aria-label="Country Code">
+                    <option value="+1">+1 (US / CA)</option>
+                    <option value="+44">+44 (UK)</option>
+                    <option value="+49">+49 (DE)</option>
+                    <option value="+33">+33 (FR)</option>
+                    <option value="+81">+81 (JP)</option>
+                    <option value="+91">+91 (IN)</option>
+                    <option value="+61">+61 (AU)</option>
+                    <option value="+86">+86 (CN)</option>
+                  </select>
+                  <input class="flex-1 h-14 px-4 rounded-xl bg-surface-container-high text-on-surface font-body-md text-body-md placeholder:text-outline border border-outline-variant/50 focus:outline-none focus:ring-2 focus:ring-primary" id="del-phone" placeholder="e.g. 555-0199" required="" type="tel" aria-label="Phone Number"/>
+                </div>
+              </div>
+
+              <!-- Reason Selector -->
+              <div class="flex flex-col gap-1.5">
+                <label class="font-label-lg text-label-lg text-on-surface font-medium" for="del-reason">Reason for Deletion (Optional)</label>
+                <select class="h-14 px-4 rounded-xl bg-surface-container-high text-on-surface font-body-md text-body-md border border-outline-variant/50 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer" id="del-reason">
+                  <option value="no_longer_needed">No longer using the application</option>
+                  <option value="privacy">Privacy &amp; data minimization preference</option>
+                  <option value="switching_device">Switching device ecosystem</option>
+                  <option value="other">Other reason</option>
+                </select>
+              </div>
+
+              <!-- Acknowledgment Checkbox -->
+              <label class="flex items-start gap-3 cursor-pointer pt-2 select-none">
+                <input class="mt-1 w-5 h-5 rounded text-primary focus:ring-primary shrink-0 accent-primary cursor-pointer" required="" type="checkbox"/>
+                <span class="font-body-md text-body-md text-on-surface-variant">
+                  I understand that submitting this request will permanently erase my cloud reading history and cannot be reversed once processed.
+                </span>
+              </label>
+
+              <!-- Submit Button -->
+              <button class="mt-2 inline-flex items-center justify-center gap-2 h-14 px-6 rounded-xl bg-error text-on-error font-label-lg text-label-lg hover:bg-red-700 active:scale-[0.99] transition-all shadow-sm min-h-touch_target cursor-pointer" type="submit">
+                <span class="material-symbols-outlined text-[20px]">delete_forever</span>
+                <span>Submit Account &amp; Data Deletion Request</span>
+              </button>
+            </form>
+
+            <!-- Feedback message area -->
+            <div class="hidden p-4 rounded-xl bg-secondary-container text-on-secondary-container font-body-md text-body-md border border-secondary/20 transition-all" id="deletion-status"></div>
+
+            <!-- Manual Email Fallback -->
+            <div class="pt-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-label-md font-label-md text-on-surface-variant bg-surface-container p-3 rounded-xl border border-surface-container-high">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[18px]">mail</span>
+                <span>Prefer manual verification? Send an email with subject “Data Deletion Request”:</span>
+              </div>
+              <a class="text-primary font-semibold underline hover:text-primary-container transition-colors" href="mailto:support@documentreader.app?subject=Data%20Deletion%20Request">
+                support@documentreader.app
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER -->
+  <!-- ========================================================================= -->
+  <footer class="w-full bg-surface-container-low shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-t border-surface-container-high/60 mt-auto">
+    <div class="max-w-7xl mx-auto px-md lg:px-xl py-xl">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-lg pb-lg border-b border-surface-container-high/60">
+        
+        <div class="flex flex-col gap-xs max-w-sm">
+          <div class="flex items-center gap-sm">
+            <img alt="DocumentReader App Icon" class="h-6 w-6 rounded-lg object-cover shadow-sm ring-1 ring-black/5" src="assets/app-icon.jpg" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/aida/AEtjO1VnW_sraEZ2BjvrrKfIGN5Aa3QolFFlNeL5QLBdzjj46EbyGGk-kexuSXA2EwzHbJ2mv2d-MhMx-OfewOGg4Mdkm2iXr3tc9IlB25EYDNe3a6PwO_AGW9b2b5SyKLfyI_XDuoz36gVQfq9iuYlLl_30WWFzRATVv9nSwoFrQR2wY0-1OA7TbyYVaArtaQOU8A4OzAOVS9UvsBfBXkO8kPWQyNufLTWthw3whiUqQS3U7jGfW1RcENCP1qd3';"/>
+            <span class="font-title-md text-title-md text-on-surface font-semibold">DocumentReader</span>
+          </div>
+          <p class="font-body-md text-body-md text-on-surface-variant">The unified document reader and organizer for deep work and mobile productivity.</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-md sm:gap-xl">
+          <div class="flex flex-col gap-xs">
+            <span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Legal &amp; Compliance</span>
+            <div class="flex flex-col gap-xs">
+              <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#privacy">Privacy Policy</a>
+              <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#terms">Terms of Service</a>
+              <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#data-deletion">Data Deletion</a>
+            </div>
+          </div>
+          <div class="flex flex-col gap-xs">
+            <span class="font-label-md text-label-md text-on-surface uppercase tracking-wider font-semibold">Developer Support</span>
+            <div class="flex flex-col gap-xs">
+              <span class="font-body-md text-body-md text-on-surface-variant">support@documentreader.app</span>
+              <span class="font-body-md text-body-md text-on-surface-variant">Built with Material Design 3</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="pt-lg flex flex-col sm:flex-row items-center justify-between gap-md">
+        <p class="font-label-md text-label-md text-on-surface-variant">© 2025 DocumentReader Project. All rights reserved.</p>
+        <div class="flex items-center gap-md">
+          <a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#home">Overview</a>
+          <a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#features">Capabilities</a>
+          <a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#downloads">Releases</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification element -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-inverse-surface text-inverse-on-surface px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3">
+    <span class="material-symbols-outlined text-primary-fixed text-[22px]" id="toast-icon">download_done</span>
+    <div>
+      <p class="font-label-lg text-label-lg font-medium" id="toast-title">Download Initiated</p>
+      <p class="text-xs text-inverse-on-surface/80" id="toast-msg">Starting download...</p>
+    </div>
+  </div>
+
+  <!-- Interactive Scripts -->
+  <script>
+    // Mobile navigation toggle
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileDrawer = document.getElementById('mobile-drawer');
+    const mobileIcon = document.getElementById('mobile-menu-icon');
+
+    if (mobileBtn && mobileDrawer) {
+      mobileBtn.addEventListener('click', () => {
+        const isHidden = mobileDrawer.classList.contains('hidden');
+        if (isHidden) {
+          mobileDrawer.classList.remove('hidden');
+          mobileIcon.textContent = 'close';
+        } else {
+          mobileDrawer.classList.add('hidden');
+          mobileIcon.textContent = 'menu';
+        }
+      });
+
+      // Close mobile drawer on navigation click
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileDrawer.classList.add('hidden');
+          mobileIcon.textContent = 'menu';
+        });
+      });
+    }
+
+    // ScrollSpy to highlight active section in Header & Sub-bar
+    const sections = ['home', 'features', 'downloads', 'privacy', 'terms', 'data-deletion'];
+    const navLinks = document.querySelectorAll('.nav-link');
+    const subNavLinks = document.querySelectorAll('.sub-nav-link');
+
+    window.addEventListener('scroll', () => {
+      let currentSection = 'home';
+      const scrollY = window.scrollY + 140;
+
+      for (const sectionId of sections) {
+        const el = document.getElementById(sectionId);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollY >= top && scrollY < top + height) {
+            currentSection = sectionId;
+            break;
+          }
+        }
+      }
+
+      // Update Desktop Nav
+      navLinks.forEach(link => {
+        const sec = link.getAttribute('data-section');
+        if (sec === currentSection) {
+          link.className = 'nav-link px-md py-sm font-label-lg transition-colors min-h-touch_target flex items-center bg-secondary-container text-on-secondary-container rounded-full font-medium';
+        } else {
+          link.className = 'nav-link px-md py-sm rounded-full font-label-lg text-label-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors min-h-touch_target flex items-center';
+        }
+      });
+
+      // Update Sub Nav
+      subNavLinks.forEach(link => {
+        const sub = link.getAttribute('data-sub');
+        if (sub === 'data-deletion') return; // keep distinct pill style for deletion
+        if (sub === currentSection) {
+          link.classList.add('bg-surface-container-high', 'text-on-surface', 'font-medium');
+        } else {
+          link.classList.remove('bg-surface-container-high', 'text-on-surface', 'font-medium');
+        }
+      });
+    });
+
+    // Toast Notification helper
+    let toastTimeout;
+    function showDownloadToast(title, subtitle) {
+      const toast = document.getElementById('toast');
+      const toastTitle = document.getElementById('toast-title');
+      const toastMsg = document.getElementById('toast-msg');
+
+      toastTitle.textContent = 'Downloading ' + title;
+      toastMsg.textContent = subtitle || 'Verification hash SHA256 verified.';
+      
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 4000);
+    }
+
+    // Homebrew copy to clipboard
+    function copyBrewCommand() {
+      const brewCmd = 'brew install --cask document-reader';
+      navigator.clipboard.writeText(brewCmd).then(() => {
+        const brewText = document.getElementById('brew-text');
+        const original = brewText.textContent;
+        brewText.textContent = 'Command Copied!';
+        showDownloadToast('brew command copied', brewCmd);
+        setTimeout(() => {
+          brewText.textContent = original;
+        }, 2500);
+      }).catch(() => {
+        showDownloadToast('Homebrew Command', 'brew install --cask document-reader');
+      });
+    }
+
+    // Deletion Form submission handler
+    function handleDeletionSubmit(event) {
+      event.preventDefault();
+      const phone = document.getElementById('del-phone').value;
+      const code = document.getElementById('del-code').value;
+      const statusBox = document.getElementById('deletion-status');
+
+      if (!phone) return;
+
+      statusBox.classList.remove('hidden');
+      statusBox.innerHTML = `
+        <div class="flex items-start gap-3">
+          <span class="material-symbols-outlined text-primary text-[24px] shrink-0 mt-0.5">mark_email_read</span>
+          <div>
+            <strong class="block text-title-md font-title-md text-on-surface">Verification Code Dispatched</strong>
+            <p class="mt-1 text-on-surface-variant">A 6-digit confirmation PIN has been sent via SMS to <strong>${code} ${phone}</strong>. Enter this code in your DocumentReader app settings under <em>Account &gt; Finalize Deletion</em>, or reply to the SMS with 'CONFIRM' to finalize deletion within 24 hours.</p>
+          </div>
+        </div>
+      `;
+      document.getElementById('deletion-form').reset();
+      statusBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  </script>
+</body>
+</html>
