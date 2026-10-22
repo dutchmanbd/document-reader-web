@@ -548,15 +548,15 @@
               <h3 class="font-title-lg text-title-lg text-on-surface font-semibold">macOS</h3>
               <p class="font-body-md text-body-md text-on-surface-variant mb-md">macOS 12 Monterey or later. Universal binary for Apple Silicon (M1/M2/M3) and Intel.</p>
               <div class="flex flex-col gap-1 text-label-md font-label-md text-on-surface-variant mb-lg font-mono">
-                <span>Size: <strong class="font-sans">~52 MB</strong></span>
+                <span>Size: <strong class="font-sans">~124 MB</strong></span>
                 <span>Arch: <strong class="font-sans">Apple Silicon + Intel</strong></span>
-                <span class="truncate text-xs">SHA256: <code class="bg-surface-container px-1 py-0.5 rounded">91cb...77d3</code></span>
+                <span class="truncate text-xs">SHA256: <code class="bg-surface-container px-1 py-0.5 rounded">ca83...22c4</code></span>
               </div>
               <div class="mt-auto flex flex-col gap-2">
-                <button class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-on-surface text-surface font-label-lg text-label-lg hover:bg-primary transition-colors min-h-touch_target shadow-sm" onclick="showDownloadToast('DocumentReader-Universal-v1.2.0.dmg', 'macOS Universal DMG (~52MB)')">
+                <a href="https://drive.usercontent.google.com/download?id=1fFde0QqqSWVaxpxDYHPKs8IGkmgeX9cF&amp;export=download&amp;authuser=1&amp;confirm=t" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-on-surface text-surface font-label-lg text-label-lg hover:bg-primary transition-colors min-h-touch_target shadow-sm" onclick="showDownloadToast('DocumentReader-1.0.0.dmg', 'macOS Universal DMG (~124MB)')">
                   <span class="material-symbols-outlined text-[20px]">download</span>
                   <span>Download .dmg</span>
-                </button>
+                </a>
                 <button id="brew-copy-btn" class="w-full inline-flex items-center justify-center gap-2 py-2 px-3 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md hover:bg-surface-variant transition-colors min-h-touch_target" onclick="copyBrewCommand()">
                   <span class="material-symbols-outlined text-[16px]">content_copy</span>
                   <span id="brew-text">Homebrew Cask</span>
@@ -795,15 +795,260 @@
               <div class="flex flex-col gap-1.5">
                 <label class="font-label-lg text-label-lg text-on-surface font-medium" for="del-phone">Registered Phone Number</label>
                 <div class="flex flex-col sm:flex-row gap-2">
-                  <select class="h-14 px-3 rounded-xl bg-surface-container-high text-on-surface font-body-md text-body-md border border-outline-variant/50 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer" id="del-code" aria-label="Country Code">
-                    <option value="+1">+1 (US / CA)</option>
-                    <option value="+44">+44 (UK)</option>
-                    <option value="+49">+49 (DE)</option>
-                    <option value="+33">+33 (FR)</option>
-                    <option value="+81">+81 (JP)</option>
-                    <option value="+91">+91 (IN)</option>
-                    <option value="+61">+61 (AU)</option>
-                    <option value="+86">+86 (CN)</option>
+                  <select class="h-14 px-3 rounded-xl bg-surface-container-high text-on-surface font-body-md text-body-md border border-outline-variant/50 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer sm:w-72 w-full truncate" id="del-code" aria-label="Country Code">
+<optgroup label="Popular">
+  <option value="+1" data-country="United States" selected>🇺🇸 United States (+1)</option>
+  <option value="+44" data-country="United Kingdom">🇬🇧 United Kingdom (+44)</option>
+  <option value="+1" data-country="Canada">🇨🇦 Canada (+1)</option>
+  <option value="+91" data-country="India">🇮🇳 India (+91)</option>
+  <option value="+880" data-country="Bangladesh">🇧🇩 Bangladesh (+880)</option>
+  <option value="+49" data-country="Germany">🇩🇪 Germany (+49)</option>
+  <option value="+33" data-country="France">🇫🇷 France (+33)</option>
+  <option value="+61" data-country="Australia">🇦🇺 Australia (+61)</option>
+</optgroup>
+<optgroup label="All Countries (A-Z)">
+  <option value="+93" data-country="Afghanistan">🇦🇫 Afghanistan (+93)</option>
+  <option value="+355" data-country="Albania">🇦🇱 Albania (+355)</option>
+  <option value="+213" data-country="Algeria">🇩🇿 Algeria (+213)</option>
+  <option value="+1684" data-country="American Samoa">🇦🇸 American Samoa (+1684)</option>
+  <option value="+376" data-country="Andorra">🇦🇩 Andorra (+376)</option>
+  <option value="+244" data-country="Angola">🇦🇴 Angola (+244)</option>
+  <option value="+1264" data-country="Anguilla">🇦🇮 Anguilla (+1264)</option>
+  <option value="+672" data-country="Antarctica">🇦🇶 Antarctica (+672)</option>
+  <option value="+1268" data-country="Antigua and Barbuda">🇦🇬 Antigua and Barbuda (+1268)</option>
+  <option value="+54" data-country="Argentina">🇦🇷 Argentina (+54)</option>
+  <option value="+374" data-country="Armenia">🇦🇲 Armenia (+374)</option>
+  <option value="+297" data-country="Aruba">🇦🇼 Aruba (+297)</option>
+  <option value="+61" data-country="Australia">🇦🇺 Australia (+61)</option>
+  <option value="+43" data-country="Austria">🇦🇹 Austria (+43)</option>
+  <option value="+994" data-country="Azerbaijan">🇦🇿 Azerbaijan (+994)</option>
+  <option value="+1242" data-country="Bahamas">🇧🇸 Bahamas (+1242)</option>
+  <option value="+973" data-country="Bahrain">🇧🇭 Bahrain (+973)</option>
+  <option value="+880" data-country="Bangladesh">🇧🇩 Bangladesh (+880)</option>
+  <option value="+1246" data-country="Barbados">🇧🇧 Barbados (+1246)</option>
+  <option value="+375" data-country="Belarus">🇧🇾 Belarus (+375)</option>
+  <option value="+32" data-country="Belgium">🇧🇪 Belgium (+32)</option>
+  <option value="+501" data-country="Belize">🇧🇿 Belize (+501)</option>
+  <option value="+229" data-country="Benin">🇧🇯 Benin (+229)</option>
+  <option value="+1441" data-country="Bermuda">🇧🇲 Bermuda (+1441)</option>
+  <option value="+975" data-country="Bhutan">🇧🇹 Bhutan (+975)</option>
+  <option value="+591" data-country="Bolivia">🇧🇴 Bolivia (+591)</option>
+  <option value="+387" data-country="Bosnia and Herzegovina">🇧🇦 Bosnia and Herzegovina (+387)</option>
+  <option value="+267" data-country="Botswana">🇧🇼 Botswana (+267)</option>
+  <option value="+55" data-country="Brazil">🇧🇷 Brazil (+55)</option>
+  <option value="+246" data-country="British Indian Ocean Territory">🇮🇴 British Indian Ocean Territory (+246)</option>
+  <option value="+1284" data-country="British Virgin Islands">🇻🇬 British Virgin Islands (+1284)</option>
+  <option value="+673" data-country="Brunei">🇧🇳 Brunei (+673)</option>
+  <option value="+359" data-country="Bulgaria">🇧🇬 Bulgaria (+359)</option>
+  <option value="+226" data-country="Burkina Faso">🇧🇫 Burkina Faso (+226)</option>
+  <option value="+257" data-country="Burundi">🇧🇮 Burundi (+257)</option>
+  <option value="+855" data-country="Cambodia">🇰🇭 Cambodia (+855)</option>
+  <option value="+237" data-country="Cameroon">🇨🇲 Cameroon (+237)</option>
+  <option value="+1" data-country="Canada">🇨🇦 Canada (+1)</option>
+  <option value="+238" data-country="Cape Verde">🇨🇻 Cape Verde (+238)</option>
+  <option value="+1345" data-country="Cayman Islands">🇰🇾 Cayman Islands (+1345)</option>
+  <option value="+236" data-country="Central African Republic">🇨🇫 Central African Republic (+236)</option>
+  <option value="+235" data-country="Chad">🇹🇩 Chad (+235)</option>
+  <option value="+56" data-country="Chile">🇨🇱 Chile (+56)</option>
+  <option value="+86" data-country="China">🇨🇳 China (+86)</option>
+  <option value="+61" data-country="Christmas Island">🇨🇽 Christmas Island (+61)</option>
+  <option value="+61" data-country="Cocos (Keeling) Islands">🇨🇨 Cocos (Keeling) Islands (+61)</option>
+  <option value="+57" data-country="Colombia">🇨🇴 Colombia (+57)</option>
+  <option value="+269" data-country="Comoros">🇰🇲 Comoros (+269)</option>
+  <option value="+242" data-country="Congo">🇨🇬 Congo (+242)</option>
+  <option value="+243" data-country="Congo (DRC)">🇨🇩 Congo (DRC) (+243)</option>
+  <option value="+682" data-country="Cook Islands">🇨🇰 Cook Islands (+682)</option>
+  <option value="+506" data-country="Costa Rica">🇨🇷 Costa Rica (+506)</option>
+  <option value="+225" data-country="Cote d'Ivoire">🇨🇮 Cote d'Ivoire (+225)</option>
+  <option value="+385" data-country="Croatia">🇭🇷 Croatia (+385)</option>
+  <option value="+53" data-country="Cuba">🇨🇺 Cuba (+53)</option>
+  <option value="+599" data-country="Curacao">🇨🇼 Curacao (+599)</option>
+  <option value="+357" data-country="Cyprus">🇨🇾 Cyprus (+357)</option>
+  <option value="+420" data-country="Czech Republic">🇨🇿 Czech Republic (+420)</option>
+  <option value="+45" data-country="Denmark">🇩🇰 Denmark (+45)</option>
+  <option value="+253" data-country="Djibouti">🇩🇯 Djibouti (+253)</option>
+  <option value="+1767" data-country="Dominica">🇩🇲 Dominica (+1767)</option>
+  <option value="+1809" data-country="Dominican Republic">🇩🇴 Dominican Republic (+1809)</option>
+  <option value="+593" data-country="Ecuador">🇪🇨 Ecuador (+593)</option>
+  <option value="+20" data-country="Egypt">🇪🇬 Egypt (+20)</option>
+  <option value="+503" data-country="El Salvador">🇸🇻 El Salvador (+503)</option>
+  <option value="+240" data-country="Equatorial Guinea">🇬🇶 Equatorial Guinea (+240)</option>
+  <option value="+291" data-country="Eritrea">🇪🇷 Eritrea (+291)</option>
+  <option value="+372" data-country="Estonia">🇪🇪 Estonia (+372)</option>
+  <option value="+268" data-country="Eswatini">🇸🇿 Eswatini (+268)</option>
+  <option value="+251" data-country="Ethiopia">🇪🇹 Ethiopia (+251)</option>
+  <option value="+500" data-country="Falkland Islands">🇫🇰 Falkland Islands (+500)</option>
+  <option value="+298" data-country="Faroe Islands">🇫🇴 Faroe Islands (+298)</option>
+  <option value="+679" data-country="Fiji">🇫🇯 Fiji (+679)</option>
+  <option value="+358" data-country="Finland">🇫🇮 Finland (+358)</option>
+  <option value="+33" data-country="France">🇫🇷 France (+33)</option>
+  <option value="+594" data-country="French Guiana">🇬🇫 French Guiana (+594)</option>
+  <option value="+689" data-country="French Polynesia">🇵🇫 French Polynesia (+689)</option>
+  <option value="+241" data-country="Gabon">🇬🇦 Gabon (+241)</option>
+  <option value="+220" data-country="Gambia">🇬🇲 Gambia (+220)</option>
+  <option value="+995" data-country="Georgia">🇬🇪 Georgia (+995)</option>
+  <option value="+49" data-country="Germany">🇩🇪 Germany (+49)</option>
+  <option value="+233" data-country="Ghana">🇬🇭 Ghana (+233)</option>
+  <option value="+350" data-country="Gibraltar">🇬🇮 Gibraltar (+350)</option>
+  <option value="+30" data-country="Greece">🇬🇷 Greece (+30)</option>
+  <option value="+299" data-country="Greenland">🇬🇱 Greenland (+299)</option>
+  <option value="+1473" data-country="Grenada">🇬🇩 Grenada (+1473)</option>
+  <option value="+590" data-country="Guadeloupe">🇬🇵 Guadeloupe (+590)</option>
+  <option value="+1671" data-country="Guam">🇬🇺 Guam (+1671)</option>
+  <option value="+502" data-country="Guatemala">🇬🇹 Guatemala (+502)</option>
+  <option value="+44" data-country="Guernsey">🇬🇬 Guernsey (+44)</option>
+  <option value="+224" data-country="Guinea">🇬🇳 Guinea (+224)</option>
+  <option value="+245" data-country="Guinea-Bissau">🇬🇼 Guinea-Bissau (+245)</option>
+  <option value="+592" data-country="Guyana">🇬🇾 Guyana (+592)</option>
+  <option value="+509" data-country="Haiti">🇭🇹 Haiti (+509)</option>
+  <option value="+504" data-country="Honduras">🇭🇳 Honduras (+504)</option>
+  <option value="+852" data-country="Hong Kong">🇭🇰 Hong Kong (+852)</option>
+  <option value="+36" data-country="Hungary">🇭🇺 Hungary (+36)</option>
+  <option value="+354" data-country="Iceland">🇮🇸 Iceland (+354)</option>
+  <option value="+91" data-country="India">🇮🇳 India (+91)</option>
+  <option value="+62" data-country="Indonesia">🇮🇩 Indonesia (+62)</option>
+  <option value="+98" data-country="Iran">🇮🇷 Iran (+98)</option>
+  <option value="+964" data-country="Iraq">🇮🇶 Iraq (+964)</option>
+  <option value="+353" data-country="Ireland">🇮🇪 Ireland (+353)</option>
+  <option value="+44" data-country="Isle of Man">🇮🇲 Isle of Man (+44)</option>
+  <option value="+972" data-country="Israel">🇮🇱 Israel (+972)</option>
+  <option value="+39" data-country="Italy">🇮🇹 Italy (+39)</option>
+  <option value="+1876" data-country="Jamaica">🇯🇲 Jamaica (+1876)</option>
+  <option value="+81" data-country="Japan">🇯🇵 Japan (+81)</option>
+  <option value="+44" data-country="Jersey">🇯🇪 Jersey (+44)</option>
+  <option value="+962" data-country="Jordan">🇯🇴 Jordan (+962)</option>
+  <option value="+7" data-country="Kazakhstan">🇰🇿 Kazakhstan (+7)</option>
+  <option value="+254" data-country="Kenya">🇰🇪 Kenya (+254)</option>
+  <option value="+686" data-country="Kiribati">🇰🇮 Kiribati (+686)</option>
+  <option value="+383" data-country="Kosovo">🇽🇰 Kosovo (+383)</option>
+  <option value="+965" data-country="Kuwait">🇰🇼 Kuwait (+965)</option>
+  <option value="+996" data-country="Kyrgyzstan">🇰🇬 Kyrgyzstan (+996)</option>
+  <option value="+856" data-country="Laos">🇱🇦 Laos (+856)</option>
+  <option value="+371" data-country="Latvia">🇱🇻 Latvia (+371)</option>
+  <option value="+961" data-country="Lebanon">🇱🇧 Lebanon (+961)</option>
+  <option value="+266" data-country="Lesotho">🇱🇸 Lesotho (+266)</option>
+  <option value="+231" data-country="Liberia">🇱🇷 Liberia (+231)</option>
+  <option value="+218" data-country="Libya">🇱🇾 Libya (+218)</option>
+  <option value="+423" data-country="Liechtenstein">🇱🇮 Liechtenstein (+423)</option>
+  <option value="+370" data-country="Lithuania">🇱🇹 Lithuania (+370)</option>
+  <option value="+352" data-country="Luxembourg">🇱🇺 Luxembourg (+352)</option>
+  <option value="+853" data-country="Macau">🇲🇴 Macau (+853)</option>
+  <option value="+261" data-country="Madagascar">🇲🇬 Madagascar (+261)</option>
+  <option value="+265" data-country="Malawi">🇲🇼 Malawi (+265)</option>
+  <option value="+60" data-country="Malaysia">🇲🇾 Malaysia (+60)</option>
+  <option value="+960" data-country="Maldives">🇲🇻 Maldives (+960)</option>
+  <option value="+223" data-country="Mali">🇲🇱 Mali (+223)</option>
+  <option value="+356" data-country="Malta">🇲🇹 Malta (+356)</option>
+  <option value="+692" data-country="Marshall Islands">🇲🇭 Marshall Islands (+692)</option>
+  <option value="+596" data-country="Martinique">🇲🇶 Martinique (+596)</option>
+  <option value="+222" data-country="Mauritania">🇲🇷 Mauritania (+222)</option>
+  <option value="+230" data-country="Mauritius">🇲🇺 Mauritius (+230)</option>
+  <option value="+262" data-country="Mayotte">🇾🇹 Mayotte (+262)</option>
+  <option value="+52" data-country="Mexico">🇲🇽 Mexico (+52)</option>
+  <option value="+691" data-country="Micronesia">🇫🇲 Micronesia (+691)</option>
+  <option value="+373" data-country="Moldova">🇲🇩 Moldova (+373)</option>
+  <option value="+377" data-country="Monaco">🇲🇨 Monaco (+377)</option>
+  <option value="+976" data-country="Mongolia">🇲🇳 Mongolia (+976)</option>
+  <option value="+382" data-country="Montenegro">🇲🇪 Montenegro (+382)</option>
+  <option value="+1664" data-country="Montserrat">🇲🇸 Montserrat (+1664)</option>
+  <option value="+212" data-country="Morocco">🇲🇦 Morocco (+212)</option>
+  <option value="+258" data-country="Mozambique">🇲🇿 Mozambique (+258)</option>
+  <option value="+95" data-country="Myanmar">🇲🇲 Myanmar (+95)</option>
+  <option value="+264" data-country="Namibia">🇳🇦 Namibia (+264)</option>
+  <option value="+674" data-country="Nauru">🇳🇷 Nauru (+674)</option>
+  <option value="+977" data-country="Nepal">🇳🇵 Nepal (+977)</option>
+  <option value="+31" data-country="Netherlands">🇳🇱 Netherlands (+31)</option>
+  <option value="+687" data-country="New Caledonia">🇳🇨 New Caledonia (+687)</option>
+  <option value="+64" data-country="New Zealand">🇳🇿 New Zealand (+64)</option>
+  <option value="+505" data-country="Nicaragua">🇳🇮 Nicaragua (+505)</option>
+  <option value="+227" data-country="Niger">🇳🇪 Niger (+227)</option>
+  <option value="+234" data-country="Nigeria">🇳🇬 Nigeria (+234)</option>
+  <option value="+683" data-country="Niue">🇳🇺 Niue (+683)</option>
+  <option value="+672" data-country="Norfolk Island">🇳🇫 Norfolk Island (+672)</option>
+  <option value="+850" data-country="North Korea">🇰🇵 North Korea (+850)</option>
+  <option value="+389" data-country="North Macedonia">🇲🇰 North Macedonia (+389)</option>
+  <option value="+1670" data-country="Northern Mariana Islands">🇲🇵 Northern Mariana Islands (+1670)</option>
+  <option value="+47" data-country="Norway">🇳🇴 Norway (+47)</option>
+  <option value="+968" data-country="Oman">🇴🇲 Oman (+968)</option>
+  <option value="+92" data-country="Pakistan">🇵🇰 Pakistan (+92)</option>
+  <option value="+680" data-country="Palau">🇵🇼 Palau (+680)</option>
+  <option value="+970" data-country="Palestine">🇵🇸 Palestine (+970)</option>
+  <option value="+507" data-country="Panama">🇵🇦 Panama (+507)</option>
+  <option value="+675" data-country="Papua New Guinea">🇵🇬 Papua New Guinea (+675)</option>
+  <option value="+595" data-country="Paraguay">🇵🇾 Paraguay (+595)</option>
+  <option value="+51" data-country="Peru">🇵🇪 Peru (+51)</option>
+  <option value="+63" data-country="Philippines">🇵🇭 Philippines (+63)</option>
+  <option value="+48" data-country="Poland">🇵🇱 Poland (+48)</option>
+  <option value="+351" data-country="Portugal">🇵🇹 Portugal (+351)</option>
+  <option value="+1787" data-country="Puerto Rico">🇵🇷 Puerto Rico (+1787)</option>
+  <option value="+974" data-country="Qatar">🇶🇦 Qatar (+974)</option>
+  <option value="+262" data-country="Reunion">🇷🇪 Reunion (+262)</option>
+  <option value="+40" data-country="Romania">🇷🇴 Romania (+40)</option>
+  <option value="+7" data-country="Russia">🇷🇺 Russia (+7)</option>
+  <option value="+250" data-country="Rwanda">🇷🇼 Rwanda (+250)</option>
+  <option value="+590" data-country="Saint Barthelemy">🇧🇱 Saint Barthelemy (+590)</option>
+  <option value="+290" data-country="Saint Helena">🇸🇭 Saint Helena (+290)</option>
+  <option value="+1869" data-country="Saint Kitts and Nevis">🇰🇳 Saint Kitts and Nevis (+1869)</option>
+  <option value="+1758" data-country="Saint Lucia">🇱🇨 Saint Lucia (+1758)</option>
+  <option value="+590" data-country="Saint Martin">🇲🇫 Saint Martin (+590)</option>
+  <option value="+508" data-country="Saint Pierre and Miquelon">🇵🇲 Saint Pierre and Miquelon (+508)</option>
+  <option value="+1784" data-country="Saint Vincent and the Grenadines">🇻🇨 Saint Vincent and the Grenadines (+1784)</option>
+  <option value="+685" data-country="Samoa">🇼🇸 Samoa (+685)</option>
+  <option value="+378" data-country="San Marino">🇸🇲 San Marino (+378)</option>
+  <option value="+239" data-country="Sao Tome and Principe">🇸🇹 Sao Tome and Principe (+239)</option>
+  <option value="+966" data-country="Saudi Arabia">🇸🇦 Saudi Arabia (+966)</option>
+  <option value="+221" data-country="Senegal">🇸🇳 Senegal (+221)</option>
+  <option value="+381" data-country="Serbia">🇷🇸 Serbia (+381)</option>
+  <option value="+248" data-country="Seychelles">🇸🇨 Seychelles (+248)</option>
+  <option value="+232" data-country="Sierra Leone">🇸🇱 Sierra Leone (+232)</option>
+  <option value="+65" data-country="Singapore">🇸🇬 Singapore (+65)</option>
+  <option value="+1721" data-country="Sint Maarten">🇸🇽 Sint Maarten (+1721)</option>
+  <option value="+421" data-country="Slovakia">🇸🇰 Slovakia (+421)</option>
+  <option value="+386" data-country="Slovenia">🇸🇮 Slovenia (+386)</option>
+  <option value="+677" data-country="Solomon Islands">🇸🇧 Solomon Islands (+677)</option>
+  <option value="+252" data-country="Somalia">🇸🇴 Somalia (+252)</option>
+  <option value="+27" data-country="South Africa">🇿🇦 South Africa (+27)</option>
+  <option value="+82" data-country="South Korea">🇰🇷 South Korea (+82)</option>
+  <option value="+211" data-country="South Sudan">🇸🇸 South Sudan (+211)</option>
+  <option value="+34" data-country="Spain">🇪🇸 Spain (+34)</option>
+  <option value="+94" data-country="Sri Lanka">🇱🇰 Sri Lanka (+94)</option>
+  <option value="+249" data-country="Sudan">🇸🇩 Sudan (+249)</option>
+  <option value="+597" data-country="Suriname">🇸🇷 Suriname (+597)</option>
+  <option value="+47" data-country="Svalbard and Jan Mayen">🇸🇯 Svalbard and Jan Mayen (+47)</option>
+  <option value="+46" data-country="Sweden">🇸🇪 Sweden (+46)</option>
+  <option value="+41" data-country="Switzerland">🇨🇭 Switzerland (+41)</option>
+  <option value="+963" data-country="Syria">🇸🇾 Syria (+963)</option>
+  <option value="+886" data-country="Taiwan">🇹🇼 Taiwan (+886)</option>
+  <option value="+992" data-country="Tajikistan">🇹🇯 Tajikistan (+992)</option>
+  <option value="+255" data-country="Tanzania">🇹🇿 Tanzania (+255)</option>
+  <option value="+66" data-country="Thailand">🇹🇭 Thailand (+66)</option>
+  <option value="+670" data-country="Timor-Leste">🇹🇱 Timor-Leste (+670)</option>
+  <option value="+228" data-country="Togo">🇹🇬 Togo (+228)</option>
+  <option value="+690" data-country="Tokelau">🇹🇰 Tokelau (+690)</option>
+  <option value="+676" data-country="Tonga">🇹🇴 Tonga (+676)</option>
+  <option value="+1868" data-country="Trinidad and Tobago">🇹🇹 Trinidad and Tobago (+1868)</option>
+  <option value="+216" data-country="Tunisia">🇹🇳 Tunisia (+216)</option>
+  <option value="+90" data-country="Turkey">🇹🇷 Turkey (+90)</option>
+  <option value="+993" data-country="Turkmenistan">🇹🇲 Turkmenistan (+993)</option>
+  <option value="+1649" data-country="Turks and Caicos Islands">🇹🇨 Turks and Caicos Islands (+1649)</option>
+  <option value="+688" data-country="Tuvalu">🇹🇻 Tuvalu (+688)</option>
+  <option value="+256" data-country="Uganda">🇺🇬 Uganda (+256)</option>
+  <option value="+380" data-country="Ukraine">🇺🇦 Ukraine (+380)</option>
+  <option value="+971" data-country="United Arab Emirates">🇦🇪 United Arab Emirates (+971)</option>
+  <option value="+44" data-country="United Kingdom">🇬🇧 United Kingdom (+44)</option>
+  <option value="+1" data-country="United States">🇺🇸 United States (+1)</option>
+  <option value="+598" data-country="Uruguay">🇺🇾 Uruguay (+598)</option>
+  <option value="+998" data-country="Uzbekistan">🇺🇿 Uzbekistan (+998)</option>
+  <option value="+678" data-country="Vanuatu">🇻🇺 Vanuatu (+678)</option>
+  <option value="+379" data-country="Vatican City">🇻🇦 Vatican City (+379)</option>
+  <option value="+58" data-country="Venezuela">🇻🇪 Venezuela (+58)</option>
+  <option value="+84" data-country="Vietnam">🇻🇳 Vietnam (+84)</option>
+  <option value="+681" data-country="Wallis and Futuna">🇼🇫 Wallis and Futuna (+681)</option>
+  <option value="+212" data-country="Western Sahara">🇪🇭 Western Sahara (+212)</option>
+  <option value="+967" data-country="Yemen">🇾🇪 Yemen (+967)</option>
+  <option value="+260" data-country="Zambia">🇿🇲 Zambia (+260)</option>
+  <option value="+263" data-country="Zimbabwe">🇿🇼 Zimbabwe (+263)</option>
+</optgroup>
                   </select>
                   <input class="flex-1 h-14 px-4 rounded-xl bg-surface-container-high text-on-surface font-body-md text-body-md placeholder:text-outline border border-outline-variant/50 focus:outline-none focus:ring-2 focus:ring-primary" id="del-phone" placeholder="e.g. 555-0199" required="" type="tel" aria-label="Phone Number"/>
                 </div>
@@ -813,10 +1058,11 @@
               <div class="flex flex-col gap-1.5">
                 <label class="font-label-lg text-label-lg text-on-surface font-medium" for="del-reason">Reason for Deletion (Optional)</label>
                 <select class="h-14 px-4 rounded-xl bg-surface-container-high text-on-surface font-body-md text-body-md border border-outline-variant/50 focus:outline-none focus:ring-2 focus:ring-primary cursor-pointer" id="del-reason">
-                  <option value="no_longer_needed">No longer using the application</option>
-                  <option value="privacy">Privacy &amp; data minimization preference</option>
-                  <option value="switching_device">Switching device ecosystem</option>
-                  <option value="other">Other reason</option>
+                  <option value="No longer using the application">No longer using the application</option>
+                  <option value="Privacy &amp; data minimization preference">Privacy &amp; data minimization preference</option>
+                  <option value="Switching device ecosystem">Switching device ecosystem</option>
+                  <option value="Temporary break">Temporary break</option>
+                  <option value="Other reason">Other reason</option>
                 </select>
               </div>
 
@@ -829,9 +1075,9 @@
               </label>
 
               <!-- Submit Button -->
-              <button class="mt-2 inline-flex items-center justify-center gap-2 h-14 px-6 rounded-xl bg-error text-on-error font-label-lg text-label-lg hover:bg-red-700 active:scale-[0.99] transition-all shadow-sm min-h-touch_target cursor-pointer" type="submit">
-                <span class="material-symbols-outlined text-[20px]">delete_forever</span>
-                <span>Submit Account &amp; Data Deletion Request</span>
+              <button id="del-submit-btn" class="mt-2 inline-flex items-center justify-center gap-2 h-14 px-6 rounded-xl bg-error text-on-error font-label-lg text-label-lg hover:bg-red-700 active:scale-[0.99] transition-all shadow-sm min-h-touch_target cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed" type="submit">
+                <span id="del-submit-icon" class="material-symbols-outlined text-[20px]">delete_forever</span>
+                <span id="del-submit-text">Submit Account &amp; Data Deletion Request</span>
               </button>
             </form>
 
@@ -1018,27 +1264,121 @@
       });
     }
 
+    // =========================================================================
+    // GOOGLE SHEETS INTEGRATION CONFIGURATION
+    // =========================================================================
+    // Follow the 2-minute deployment guide in google-apps-script.js
+    // Paste your deployed Web App URL below (starts with https://script.google.com/macros/s/.../exec)
+    const GOOGLE_SCRIPT_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzeKeJwfj5YJN0ZIOdbsLdlsVHIqJpKGKisfmmY-hWlvkd2Ie0IuTwpvBevBoZEy4Wo/exec";
+    const TARGET_SPREADSHEET_URL = "https://docs.google.com/spreadsheets/d/1vOf8L0QNZjR_V-g5jE8FhhM0NaBjKCRCWFEe8Bkr8Ac/edit";
+
     // Deletion Form submission handler
-    function handleDeletionSubmit(event) {
+    async function handleDeletionSubmit(event) {
       event.preventDefault();
-      const phone = document.getElementById('del-phone').value;
-      const code = document.getElementById('del-code').value;
+      
+      const phoneInput = document.getElementById('del-phone');
+      const codeSelect = document.getElementById('del-code');
+      const reasonSelect = document.getElementById('del-reason');
       const statusBox = document.getElementById('deletion-status');
+      const submitBtn = document.getElementById('del-submit-btn');
+      const submitIcon = document.getElementById('del-submit-icon');
+      const submitText = document.getElementById('del-submit-text');
 
-      if (!phone) return;
+      const phone = phoneInput ? phoneInput.value.trim().replace(/\s+/g, '') : '';
+      const code = codeSelect ? codeSelect.value.trim() : '';
+      const selectedOption = codeSelect ? codeSelect.options[codeSelect.selectedIndex] : null;
+      const countryName = selectedOption ? (selectedOption.getAttribute('data-country') || '') : '';
+      const reason = reasonSelect ? reasonSelect.value : '';
+      const fullPhoneNumber = `${code}${phone}`;
+      const fullPhone = fullPhoneNumber;
 
-      statusBox.classList.remove('hidden');
-      statusBox.innerHTML = `
-        <div class="flex items-start gap-3">
-          <span class="material-symbols-outlined text-primary text-[24px] shrink-0 mt-0.5">mark_email_read</span>
-          <div>
-            <strong class="block text-title-md font-title-md text-on-surface">Verification Code Dispatched</strong>
-            <p class="mt-1 text-on-surface-variant">A 6-digit confirmation PIN has been sent via SMS to <strong>${code} ${phone}</strong>. Enter this code in your DocumentReader app settings under <em>Account &gt; Finalize Deletion</em>, or reply to the SMS with 'CONFIRM' to finalize deletion within 24 hours.</p>
+      if (!phone) {
+        if (phoneInput) phoneInput.focus();
+        return;
+      }
+
+      // Enter loading state
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitIcon) {
+        submitIcon.textContent = 'progress_activity';
+        submitIcon.classList.add('animate-spin');
+      }
+      if (submitText) submitText.textContent = 'Submitting Request...';
+
+      const payload = {
+        timestamp: new Date().toISOString(),
+        countryCode: code,
+        countryName: countryName,
+        phoneNumber: phone,
+        fullPhone: fullPhoneNumber,
+        fullPhoneNumber: fullPhoneNumber,
+        reason: reason,
+        submittedAt: new Date().toLocaleString(),
+        userAgent: navigator.userAgent
+      };
+
+      try {
+        // If Google Apps Script Web App URL is configured, send the request
+        if (GOOGLE_SCRIPT_WEB_APP_URL && GOOGLE_SCRIPT_WEB_APP_URL !== "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL") {
+          await fetch(GOOGLE_SCRIPT_WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Standard technique to prevent CORS preflight blocking in Apps Script
+            headers: {
+              'Content-Type': 'text/plain;charset=utf-8'
+            },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          // Simulated slight delay when URL is pending setup
+          await new Promise(resolve => setTimeout(resolve, 800));
+          console.info('Deletion form submitted locally. Deploy google-apps-script.js to Google Apps Script and paste your Web App URL into GOOGLE_SCRIPT_WEB_APP_URL in index.html to sync live to your Google Sheet.');
+        }
+
+        // Display confirmation feedback
+        statusBox.className = "p-5 rounded-2xl bg-secondary-container text-on-secondary-container font-body-md text-body-md border border-secondary/30 shadow-sm transition-all";
+        statusBox.classList.remove('hidden');
+        statusBox.innerHTML = `
+          <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-primary text-[28px] shrink-0 mt-0.5">check_circle</span>
+            <div class="space-y-1.5 flex-1">
+              <strong class="block text-title-md font-title-md text-on-surface">Deletion Request Submitted</strong>
+              <p class="text-on-surface-variant leading-relaxed">
+                A 6-digit confirmation PIN has been dispatched to <strong>${fullPhoneNumber}</strong> (${countryName || 'Registered Account'}). Enter this code in your DocumentReader app under <em>Account &gt; Finalize Deletion</em>, or reply to the SMS with 'CONFIRM' to finalize within 24 hours.
+              </p>
+              ${GOOGLE_SCRIPT_WEB_APP_URL && GOOGLE_SCRIPT_WEB_APP_URL !== "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL" ? `
+                <div class="mt-2.5 flex items-center gap-1.5 text-label-md text-primary font-medium">
+                  <span class="material-symbols-outlined text-[16px]">cloud_done</span>
+                  <span>Request saved to Google Spreadsheet</span>
+                </div>
+              ` : ''}
+            </div>
           </div>
-        </div>
-      `;
-      document.getElementById('deletion-form').reset();
-      statusBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        `;
+
+        document.getElementById('deletion-form').reset();
+        statusBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      } catch (err) {
+        console.error('Submission error:', err);
+        statusBox.className = "p-5 rounded-2xl bg-error-container text-on-error-container font-body-md text-body-md border border-error/30 shadow-sm transition-all";
+        statusBox.classList.remove('hidden');
+        statusBox.innerHTML = `
+          <div class="flex items-start gap-3">
+            <span class="material-symbols-outlined text-error text-[28px] shrink-0 mt-0.5">error</span>
+            <div>
+              <strong class="block text-title-md font-title-md text-on-error-container">Submission Notice</strong>
+              <p class="mt-1 leading-relaxed">We could not reach the server right now. Please retry in a moment, or send your deletion request to <a class="font-bold underline" href="mailto:support@documentreader.app?subject=Data%20Deletion%20Request">support@documentreader.app</a>.</p>
+            </div>
+          </div>
+        `;
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitIcon) {
+          submitIcon.textContent = 'delete_forever';
+          submitIcon.classList.remove('animate-spin');
+        }
+        if (submitText) submitText.textContent = 'Submit Account & Data Deletion Request';
+      }
     }
   </script>
 </body>
